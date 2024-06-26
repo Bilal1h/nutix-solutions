@@ -1,0 +1,35 @@
+body.dark-mode {
+    background-color: #222;
+    color: #fff;
+  }
+  /* Light mode styles */
+.neumorphism {
+    background-color: #fff;
+    box-shadow: 10px 10px 20px #c4c4c4, -10px -10px 20px #ffffff;
+  }
+  
+  /* Dark mode styles */
+  .dark-mode .neumorphism {
+    background-color: #222;
+    box-shadow: 10px 10px 20px #111, -10px -10px 20px #333;
+  }
+  
+  
+  .dark-mode header nav ul li a {
+    color: #fff;
+  }
+  
+  .dark-mode .neumorphism {
+    background-color: #222;
+    box-shadow: 10px 10px 20px #111, -10px -10px 20px #333;
+  }
+  
+  .dark-mode .card-header {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .dark-mode .card-body {
+    background-color: #111;
+  }
+  

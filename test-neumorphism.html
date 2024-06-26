@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Typing Animation</title>
+    <style>
+      #typing {
+        overflow: hidden; /* Ensures the text is not revealed until the animation */
+        border-right: 0.15em solid orange; /* The typewriter cursor */
+        white-space: nowrap; /* Keeps the content on a single line */
+        margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+        letter-spacing: 0.15em; /* Adjust as needed */
+        animation: typing 3.5s steps(30, end),
+          blink-caret 0.75s step-end infinite;
+      }
+
+      /* The typing effect */
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      /* The typewriter cursor effect */
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: orange;
+        }
+      }
+      #chat-box {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        height: 400px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><span id="typing">I am a </span></h1>
+    <div id="chat-box">
+      <div id="chat-messages"></div>
+      <form id="chat-form">
+        <input type="text" id="chat-input" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script>
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const chatMessages = document.getElementById("chat-messages");
+
+      chatForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = chatInput.value;
+        // send message to server or other clients
+        chatInput.value = "";
+      });
+
+      function receiveMessage(message) {
+        const messageElement = document.createElement("div");
+        messageElement.innerText = message;
+        chatMessages.appendChild(messageElement);
+      }
+
+      const typingElement = document.getElementById("typing");
+      const textArray = ["Graphic Designer", "Video Editor", "Programmer"];
+      let textIndex = 0;
+
+      function typeText(text) {
+        return new Promise((resolve) => {
+          let i = 0;
+          const timer = setInterval(() => {
+            typingElement.textContent += text.charAt(i);
+            i++;
+            if (i > text.length - 1) {
+              clearInterval(timer);
+              resolve();
+            }
+          }, 100);
+        });
+      }
+
+      async function typingEffect() {
+        while (true) {
+          await typeText(textArray[textIndex]);
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+          typingElement.textContent = "I am a ";
+          textIndex++;
+          if (textIndex >= textArray.length) {
+            textIndex = 0;
+          }
+        }
+      }
+
+      typingEffect();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+</head>
+<body>
+<button type="button" id="subbut">Click ME</button>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const subbut = document.getElementById("subbut");
+  subbut.addEventListener("click", subsend);
+
+  function subsend() {
+
+    Email.send({
+      Host : "smtp.elasticemail.com",
+      Username : "haiderbilal1h@gmail.com",
+      Password : "9F03C4DCB7076192A0F2B7997678833FF934",
+      To : "bilalhaider1h@gmail.com",
+      From : "haiderbilal1h@gmail.com",
+      Subject : "New subscriber",
+      Body : `Another Subscriber test`
+    }).then(function(message) {
+      if (message=="OK"){
+        alert("Sent successfully");
+      } else {
+        alert("An error occurred.");
+      }
+    });
+  }
+});
+
+</script>
+
+</body>
+
+</html>
